@@ -1,0 +1,10 @@
+{
+  "Name": "ClamsAreFish",
+  "Author": "morgan_leplay",
+  "Version": "1.0.0",
+  "Description": "Makes Clams function as Fish",
+  "UniqueID": "morganleplay.clamsarefish",
+  "EntryDll": "clamsarefish.dll",
+  "MinimumApiVersion": "3.0.0",
+  "UpdateKeys": []
+}
