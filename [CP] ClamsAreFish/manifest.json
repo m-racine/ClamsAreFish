@@ -1,0 +1,15 @@
+{
+  "Name": "[CP] ClamsAreFish",
+  "Author": "morgan_leplay",
+  "Version": "1.0.0",
+  "Description": "Makes Clams function as Fish, uses Content Patcher",
+  "UniqueID": "morganleplay.cp.clamsarefish",
+  "ContentPackFor": {
+    "UniqueID": "Pathoschild.ContentPatcher"
+  },
+  "Dependencies": [
+    {
+      "UniqueID": "spacechase0.JsonAssets"
+    }
+  ]
+}

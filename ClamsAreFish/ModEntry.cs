@@ -43,21 +43,6 @@ namespace ClamsAreFish
                     data[CLAM_ID] = string.Join("/", fields);
                 });
             }
-
-            if (e.NameWithoutLocale.IsEquivalentTo("Data/FishPondData"))
-            {
-                e.Edit(asset =>
-                {
-                    var data = asset.AsDictionary<int, string>().Data;
-                    foreach (int itemID in data.Keys.ToArray())
-                    {
-                        string[] fields = data[itemID].Split('/');
-                        Monitor.Log($"Loaded {string.Join(", ", fields)}.", LogLevel.Debug);
-                    }
-
-                });
-            }
-
         }
     }
 }

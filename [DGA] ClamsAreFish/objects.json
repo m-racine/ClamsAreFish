@@ -1,0 +1,14 @@
+{
+  "ID": "Clam Shell",
+  //"JsonAssetsName":  "Clam Shell",
+  "Texture": "assets/objects/Clam Shell.png",
+  "SellPrice": 50,
+  "Category": "Junk",
+  "Edibility": -300,
+  "UniversalGiftTaste": -40
+}
+
+
+// Name, Price, Edibility, Type & Category, Display Name (translation), Description (translated), misc, misc2, buff duration
+// Initial
+// Clam, 50, -300, Basic -23, Clam, Someone lived here once.. 
