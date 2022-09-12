@@ -77,6 +77,37 @@
         "Clam": "color_light_cyan, beach_item, fish_crab_pot, fish_ocean, fish_upright",
         "Clam Shell": "color_light_cyan, beach_item, forage_item, forage_item_beach, trash_item"
       }
+    },
+    {
+      "Action": "EditData",
+      "Target": "Data/Locations",
+      "TextOperations": [
+        {
+          "Operation": "Append",
+          "Target": ["Entries", "Beach", 0],
+          "Value": "{{spacechase0.JsonAssets/ObjectId:Clam Shell}} .9",
+          "Delimiter": " "
+        },
+        {
+          "Operation": "Append",    
+          "Target": ["Entries", "Beach", 1],
+          "Value": "{{spacechase0.JsonAssets/ObjectId:Clam Shell}} .9",
+          "Delimiter": " "
+        },
+        {
+          "Operation": "Append",
+          "Target": ["Entries", "Beach", 2],
+          "Value": "{{spacechase0.JsonAssets/ObjectId:Clam Shell}} .9",
+          "Delimiter": " "
+        },
+        {
+          "Operation": "Append",
+          "Target": ["Entries", "Beach", 3],
+          "Value": "{{spacechase0.JsonAssets/ObjectId:Clam Shell}} .9",
+          "Delimiter": " "
+        }
+      ]
+        
     }
   ]
 }

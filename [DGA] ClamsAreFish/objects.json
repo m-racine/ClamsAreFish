@@ -1,12 +1,14 @@
-{
-  "ID": "Clam Shell",
-  //"JsonAssetsName":  "Clam Shell",
-  "Texture": "assets/objects/Clam Shell.png",
-  "SellPrice": 50,
-  "Category": "Junk",
-  "Edibility": -300,
-  "UniversalGiftTaste": -40
-}
+[
+  {
+    "ID": "Clam Shell",
+    "JsonAssetsName":  "Clam Shell",
+    "Texture": "assets/objects/Clam Shell.png",
+    "Edibility": -300,
+    "SellPrice": 50,
+    "Category": "Junk",
+    "UniversalGiftTaste": -40
+  }
+]
 
 
 // Name, Price, Edibility, Type & Category, Display Name (translation), Description (translated), misc, misc2, buff duration

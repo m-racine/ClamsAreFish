@@ -6,44 +6,68 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HarmonyLib;
+using StardewValley.Objects;
 
 namespace ClamsAreFish
 {
-    /// <summary>The mod entry point.</summary>
+    // <summary>The mod entry point.</summary>
     public class ModEntry : Mod
     {
-        private readonly int CLAM_ID = 372;
-        private readonly string TRUE_FISH = "Fish -4";
-
         /*********
         ** Public methods
         *********/
+        internal Harmony Harmony;
+        public static Random Random = new();
+
+        // <summary>The mod entry point, called after the mod is first loaded.</summary>
+        // <param name="helper">Provides simplified APIs for writing mods.</param>
         public override void Entry(IModHelper helper)
         {
-            helper.Events.Content.AssetRequested += this.OnAssetRequested;
+            Harmony = new Harmony(ModManifest.UniqueID);
+            Harmony.Patch(AccessTools.Method(typeof(StardewValley.Object), nameof(StardewValley.Object.performObjectDropInAction)),
+                postfix: new HarmonyMethod(AccessTools.Method(typeof(ModEntry), nameof(Postfix))));
         }
 
-
-        /*********
-        ** Private methods
-        *********/
-        /// <inheritdoc cref="IContentEvents.AssetRequested"/>
-        /// <param name="sender">The event sender.</param>
-        /// <param name="e">The event data.</param>
-        private void OnAssetRequested(object sender, AssetRequestedEventArgs e)
+        public static void Postfix(ref bool __result, ref StardewValley.Object __instance, ref Item dropInItem, ref bool probe, ref Farmer who)
         {
-            if (e.NameWithoutLocale.IsEquivalentTo("Data/ObjectInformation"))
+            if (__instance?.Name is "Recycling Machine")
             {
-                e.Edit(asset =>
+                if (dropInItem?.Name is "Clam Shell")
                 {
-                    var data = asset.AsDictionary<int, string>().Data;
-                    string[] fields = data[CLAM_ID].Split('/');
-                    // Fields at index 3 is type/category
-                    fields[3] = TRUE_FISH;
-                    data[CLAM_ID] = string.Join("/", fields);
-                });
+                    __instance.heldObject.Value = new StardewValley.Object(542, 1);
+                    if (!probe)
+                    {
+                        who.currentLocation.playSound("trashcan");
+                        __instance.MinutesUntilReady = 60;
+                        Game1.stats.PiecesOfTrashRecycled++;
+                    }
+                    __result = true;
+                }
             }
         }
+
+        // /*********
+        // ** Private methods
+        // *********/
+        // /// <inheritdoc cref="IContentEvents.AssetRequested"/>
+        // /// <param name="sender">The event sender.</param>
+        // /// <param name="e">The event data.</param>
+        // private void OnAssetRequested(object sender, AssetRequestedEventArgs e)
+        // {
+        //     if (e.NameWithoutLocale.IsEquivalentTo("Data/BigCraftableInformation"))
+        //     {
+        //         e.Edit(asset =>
+        //         {
+        //             var data = asset.AsDictionary<int, string>().Data;
+        //             string[] fields = data[CLAM_ID].Split('/');
+        //             // Fields at index 3 is type/category
+        //             /*fields[3] = TRUE_FISH;
+        //             data[CLAM_ID] = string.Join("/", fields);*/
+        //             Monitor.Log($"Loaded {string.Join(", ", fields)}.", LogLevel.Debug);
+        //         });
+        //     }
+        // }
     }
 }
 
@@ -60,3 +84,8 @@ namespace ClamsAreFish
  * Fish Pond entry -- currently its caught in the catch all, which isn't exactly exciting.
  * Add "Pearl" as a fish pond item?
  */
+
+/*
+ * Credit: https://github.com/XxHarvzBackxX/recyclableCola
+
+*/
